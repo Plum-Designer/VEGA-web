@@ -1,0 +1,161 @@
+:root {
+  --bg: #000000;
+  --surface: rgba(255,255,255,0.06);
+  --card: rgba(255,255,255,0.04);
+  --text: #ffffff;
+  --text-secondary: #999999;
+  --accent: #ffffff;
+  --border: rgba(255,255,255,0.12);
+  --tab-bar: rgba(0,0,0,0.95);
+}
+
+[data-theme="white"] {
+  --bg: #ffffff;
+  --surface: rgba(0,0,0,0.04);
+  --card: rgba(0,0,0,0.02);
+  --text: #000000;
+  --text-secondary: #555555;
+  --accent: #000000;
+  --border: rgba(0,0,0,0.12);
+  --tab-bar: rgba(255,255,255,0.95);
+}
+
+[data-theme="navy"] {
+  --bg: #0B1957;
+  --surface: rgba(226,195,201,0.1);
+  --card: rgba(226,195,201,0.06);
+  --text: #ffffff;
+  --text-secondary: #cbd5e1;
+  --accent: #E2C3C9;
+  --border: rgba(226,195,201,0.2);
+  --tab-bar: rgba(11,25,87,0.95);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%; width: 100%; overflow: hidden;
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  display: flex; flex-direction: column;
+  height: 100dvh; max-width: 480px;
+  margin: 0 auto; position: relative;
+  background: var(--bg); overflow: hidden;
+}
+
+.scroll-area {
+  overflow-y: auto; flex: 1;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-area::-webkit-scrollbar { display: none; }
+
+.tab-bar {
+  display: flex; flex-shrink: 0;
+  background: var(--tab-bar);
+  border-top: 1px solid var(--border);
+  padding: 8px 8px env(safe-area-inset-bottom, 8px);
+}
+
+.tab-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 3px; cursor: pointer;
+  padding: 6px 0; transition: opacity 0.2s;
+}
+
+.tab-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; transition: background 0.2s;
+}
+.tab-icon.active { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.tab-label { font-size: 10px; color: var(--text-secondary); }
+.tab-label.active { color: var(--accent); font-weight: 600; }
+
+.screen { padding: 0 0 16px; }
+
+.page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px 16px;
+}
+
+.page-title {
+  font-size: 28px; color: var(--accent);
+  font-weight: 200; letter-spacing: 4px;
+}
+
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 18px; margin: 0 16px 12px;
+}
+
+.card-title {
+  font-size: 11px; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+}
+
+.btn-primary {
+  background: var(--accent); color: var(--bg);
+  border: none; border-radius: 12px; padding: 14px 20px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  width: 100%; transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-secondary {
+  background: transparent; color: var(--text-secondary);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 20px; font-size: 15px; cursor: pointer;
+  width: 100%; transition: opacity 0.2s;
+}
+
+.input {
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px; font-size: 15px; color: var(--text);
+  outline: none; transition: border-color 0.2s;
+  font-family: inherit;
+}
+.input:focus { border-color: var(--accent); }
+.input::placeholder { color: var(--text-secondary); }
+
+.filter-tabs {
+  display: flex; background: var(--surface);
+  border-radius: 10px; padding: 3px; margin: 0 16px 16px; gap: 2px;
+}
+.filter-tab {
+  flex: 1; padding: 7px; text-align: center;
+  font-size: 13px; color: var(--text-secondary);
+  border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  border: none; background: transparent;
+}
+.filter-tab.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+@keyframes rotateRect {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.bg-rect {
+  position: absolute; width: 64px; height: 480px;
+  border: 1.5px solid var(--border); border-radius: 4px;
+  pointer-events: none;
+}
+
+.privacy-badge {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 12px; margin-top: 4px;
+}
+.privacy-text { font-size: 11px; color: var(--text-secondary); }
+
+@media (min-width: 480px) {
+  .app-shell {
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+}
